@@ -1,0 +1,1761 @@
+{
+  "configuration" : { },
+  "description" : "Arquitectura C4 de la Plataforma de Procesos BBP-GA-PP-205",
+  "documentation" : { },
+  "id" : 1,
+  "lastModifiedDate" : "2026-11-05T23:04:16Z",
+  "model" : {
+    "deploymentNodes" : [ {
+      "children" : [ {
+        "children" : [ {
+          "children" : [ {
+            "containerInstances" : [ {
+              "containerId" : "16",
+              "environment" : "MVP",
+              "id" : "123",
+              "instanceId" : 1,
+              "properties" : {
+                "structurizr.dsl.identifier" : "80123d2f-0186-4147-8841-eb1c2555f819"
+              },
+              "relationships" : [ {
+                "description" : "Consume servicios",
+                "destinationId" : "124",
+                "id" : "125",
+                "linkedRelationshipId" : "62",
+                "sourceId" : "123",
+                "technology" : "REST/JSON sobre HTTPS"
+              } ],
+              "tags" : "Container Instance"
+            }, {
+              "containerId" : "17",
+              "environment" : "MVP",
+              "id" : "124",
+              "instanceId" : 1,
+              "properties" : {
+                "structurizr.dsl.identifier" : "7b2d5402-a0ed-4e26-a313-d2871416763a"
+              },
+              "relationships" : [ {
+                "description" : "Publica tareas asíncronas",
+                "destinationId" : "129",
+                "id" : "130",
+                "linkedRelationshipId" : "65",
+                "sourceId" : "124",
+                "technology" : "Broker de mensajes"
+              }, {
+                "description" : "Consulta y persiste información",
+                "destinationId" : "133",
+                "id" : "134",
+                "linkedRelationshipId" : "63",
+                "sourceId" : "124",
+                "technology" : "SQL"
+              }, {
+                "description" : "Carga y consulta documentos",
+                "destinationId" : "137",
+                "id" : "138",
+                "linkedRelationshipId" : "64",
+                "sourceId" : "124",
+                "technology" : "HTTPS / S3 API"
+              } ],
+              "tags" : "Container Instance"
+            }, {
+              "containerId" : "34",
+              "environment" : "MVP",
+              "id" : "126",
+              "instanceId" : 1,
+              "properties" : {
+                "structurizr.dsl.identifier" : "77f97eca-9f13-478f-882b-25a068d624f8"
+              },
+              "relationships" : [ {
+                "description" : "Procesa notificaciones",
+                "destinationId" : "124",
+                "id" : "127",
+                "linkedRelationshipId" : "118",
+                "sourceId" : "126"
+              }, {
+                "description" : "Consume mensajes",
+                "destinationId" : "129",
+                "id" : "131",
+                "linkedRelationshipId" : "66",
+                "sourceId" : "126",
+                "technology" : "Broker de mensajes"
+              }, {
+                "description" : "Consulta y actualiza datos",
+                "destinationId" : "133",
+                "id" : "135",
+                "linkedRelationshipId" : "67",
+                "sourceId" : "126",
+                "technology" : "SQL"
+              }, {
+                "description" : "Gestiona archivos",
+                "destinationId" : "137",
+                "id" : "139",
+                "linkedRelationshipId" : "68",
+                "sourceId" : "126",
+                "technology" : "S3 API"
+              } ],
+              "tags" : "Container Instance"
+            } ],
+            "description" : "Servicios principales del MVP.",
+            "environment" : "MVP",
+            "id" : "122",
+            "instances" : "1",
+            "name" : "Contenedores Aplicación",
+            "properties" : {
+              "structurizr.dsl.identifier" : "6adb9109-7ad9-4f99-9ad0-2fc510240358"
+            },
+            "tags" : "Element,Deployment Node",
+            "technology" : "Docker Compose"
+          }, {
+            "containerInstances" : [ {
+              "containerId" : "37",
+              "environment" : "MVP",
+              "id" : "129",
+              "instanceId" : 1,
+              "properties" : {
+                "structurizr.dsl.identifier" : "46341fd3-4f4b-4e95-b604-ab92cef95997"
+              },
+              "tags" : "Container Instance"
+            } ],
+            "description" : "Broker de mensajes para tareas asíncronas del Worker.",
+            "environment" : "MVP",
+            "id" : "128",
+            "instances" : "1",
+            "name" : "Redis Local",
+            "properties" : {
+              "structurizr.dsl.identifier" : "6b1c749c-d43f-4b9a-8998-8b237908968a"
+            },
+            "tags" : "Element,Deployment Node",
+            "technology" : "Redis"
+          } ],
+          "description" : "Servidor único para la capa web y aplicación mediante Docker Compose.",
+          "environment" : "MVP",
+          "id" : "121",
+          "instances" : "1",
+          "name" : "EC2 Aplicación",
+          "properties" : {
+            "structurizr.dsl.identifier" : "dfe924a1-8d44-4b1f-a24a-14caa90b6660"
+          },
+          "tags" : "Element,Deployment Node",
+          "technology" : "Amazon EC2 + Docker Compose"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "35",
+            "environment" : "MVP",
+            "id" : "133",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "1e11b0ec-959e-4791-a4d4-7824ffcc421b"
+            },
+            "tags" : "Container Instance"
+          } ],
+          "description" : "Base de datos administrada de bajo costo para el MVP.",
+          "environment" : "MVP",
+          "id" : "132",
+          "instances" : "1",
+          "name" : "RDS PostgreSQL Single-AZ",
+          "properties" : {
+            "structurizr.dsl.identifier" : "7707dab7-f302-4ea5-ad9e-c130110d10be"
+          },
+          "tags" : "Element,Deployment Node",
+          "technology" : "Amazon RDS PostgreSQL Single-AZ"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "36",
+            "environment" : "MVP",
+            "id" : "137",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "b1a4be3a-f07c-4175-8ea7-77619b5dff50"
+            },
+            "tags" : "Container Instance"
+          } ],
+          "description" : "Almacenamiento de documentos, versiones y evidencias.",
+          "environment" : "MVP",
+          "id" : "136",
+          "instances" : "1",
+          "name" : "S3 Documental",
+          "properties" : {
+            "structurizr.dsl.identifier" : "6e7388a0-a1fe-4c9c-9301-047908e87cdf"
+          },
+          "tags" : "Element,Deployment Node",
+          "technology" : "Amazon S3"
+        } ],
+        "description" : "Red de la solución MVP.",
+        "environment" : "MVP",
+        "id" : "120",
+        "instances" : "1",
+        "name" : "VPC Plataforma de Procesos",
+        "properties" : {
+          "structurizr.dsl.identifier" : "29a14c89-f5ea-4a49-814c-dcfed2de9956"
+        },
+        "tags" : "Element,Deployment Node",
+        "technology" : "AWS VPC"
+      } ],
+      "description" : "Infraestructura AWS de bajo costo para el MVP.",
+      "environment" : "MVP",
+      "id" : "119",
+      "instances" : "1",
+      "name" : "AWS",
+      "properties" : {
+        "structurizr.dsl.identifier" : "91e51f88-e0eb-4ca8-b223-fc6e6e82c5e2"
+      },
+      "tags" : "Element,Deployment Node",
+      "technology" : "Amazon Web Services"
+    } ],
+    "people" : [ {
+      "description" : "Genera solicitudes de creación o actualización de procedimientos y participa en el visto bueno.",
+      "id" : "1",
+      "name" : "Responsable de Área",
+      "properties" : {
+        "structurizr.dsl.identifier" : "solicitante"
+      },
+      "relationships" : [ {
+        "description" : "Genera y consulta solicitudes",
+        "destinationId" : "15",
+        "id" : "38",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Utiliza",
+        "destinationId" : "16",
+        "id" : "55",
+        "sourceId" : "1",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Gestiona el plan de trabajo, sprints, documentación y versiones de trabajo.",
+      "id" : "2",
+      "name" : "Analista de Procesos",
+      "properties" : {
+        "structurizr.dsl.identifier" : "analista"
+      },
+      "relationships" : [ {
+        "description" : "Gestiona documentación y plan de trabajo",
+        "destinationId" : "15",
+        "id" : "39",
+        "sourceId" : "2",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Utiliza",
+        "destinationId" : "16",
+        "id" : "56",
+        "sourceId" : "2",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Revisa y valida documentos y controla el avance del procedimiento.",
+      "id" : "3",
+      "name" : "Coordinador de Procesos",
+      "properties" : {
+        "structurizr.dsl.identifier" : "coordinador"
+      },
+      "relationships" : [ {
+        "description" : "Revisa y valida documentos",
+        "destinationId" : "15",
+        "id" : "40",
+        "sourceId" : "3",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Utiliza",
+        "destinationId" : "16",
+        "id" : "57",
+        "sourceId" : "3",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Administra solicitudes, nomenclaturas, usuarios, permisos y liberaciones documentales.",
+      "id" : "4",
+      "name" : "Jefe de Procesos",
+      "properties" : {
+        "structurizr.dsl.identifier" : "jefeProcesos"
+      },
+      "relationships" : [ {
+        "description" : "Administra la plataforma y el proceso documental",
+        "destinationId" : "15",
+        "id" : "41",
+        "sourceId" : "4",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Utiliza",
+        "destinationId" : "16",
+        "id" : "58",
+        "sourceId" : "4",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Revisa, autoriza o rechaza documentos dentro del flujo de firma.",
+      "id" : "5",
+      "name" : "Revisor / Autorizador",
+      "properties" : {
+        "structurizr.dsl.identifier" : "firmante"
+      },
+      "relationships" : [ {
+        "description" : "Revisa, firma o rechaza documentos",
+        "destinationId" : "15",
+        "id" : "42",
+        "sourceId" : "5",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Utiliza",
+        "destinationId" : "16",
+        "id" : "59",
+        "sourceId" : "5",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Consulta documentos vigentes de acuerdo con sus permisos y categoría documental.",
+      "id" : "6",
+      "name" : "Colaborador GS",
+      "properties" : {
+        "structurizr.dsl.identifier" : "colaborador"
+      },
+      "relationships" : [ {
+        "description" : "Consulta documentación vigente",
+        "destinationId" : "15",
+        "id" : "43",
+        "sourceId" : "6",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Utiliza",
+        "destinationId" : "16",
+        "id" : "60",
+        "sourceId" : "6",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Consulta documentos publicados que le hayan sido asignados explícitamente.",
+      "id" : "7",
+      "name" : "Usuario Externo",
+      "properties" : {
+        "structurizr.dsl.identifier" : "externo"
+      },
+      "relationships" : [ {
+        "description" : "Consulta documentos autorizados",
+        "destinationId" : "15",
+        "id" : "44",
+        "sourceId" : "7",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Utiliza",
+        "destinationId" : "16",
+        "id" : "61",
+        "sourceId" : "7",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Aprueba el Programa Anual de actualización y administra roles y permisos.",
+      "id" : "8",
+      "name" : "Gerente Administrativo",
+      "properties" : {
+        "structurizr.dsl.identifier" : "gerenteAdmin"
+      },
+      "relationships" : [ {
+        "description" : "Aprueba el programa anual y administra roles y permisos",
+        "destinationId" : "15",
+        "id" : "45",
+        "sourceId" : "8",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Utiliza",
+        "destinationId" : "16",
+        "id" : "72",
+        "sourceId" : "8",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Revisa documentos mediante una liga enviada por correo y emite comentarios o visto bueno.",
+      "id" : "9",
+      "name" : "Revisor Externo",
+      "properties" : {
+        "structurizr.dsl.identifier" : "revisorExterno"
+      },
+      "relationships" : [ {
+        "description" : "Emite comentarios o visto bueno desde una liga",
+        "destinationId" : "15",
+        "id" : "46",
+        "sourceId" : "9",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Utiliza",
+        "destinationId" : "16",
+        "id" : "73",
+        "sourceId" : "9",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Define metas y umbrales de los indicadores calculados con los datos de la plataforma.",
+      "id" : "10",
+      "name" : "Área de Desempeño",
+      "properties" : {
+        "structurizr.dsl.identifier" : "desempeno"
+      },
+      "relationships" : [ {
+        "description" : "Define metas y umbrales, consulta indicadores",
+        "destinationId" : "14",
+        "id" : "54",
+        "sourceId" : "10",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Person"
+    } ],
+    "softwareSystems" : [ {
+      "description" : "Servicio corporativo de autenticación de usuarios internos. Su respuesta incluye identificador, nómina, nombre, departamento, puesto, correo y estatus del colaborador.",
+      "documentation" : { },
+      "id" : "11",
+      "name" : "Servicio de Login Kiosko",
+      "properties" : {
+        "structurizr.dsl.identifier" : "kiosko"
+      },
+      "tags" : "Element,Software System,External System"
+    }, {
+      "description" : "Sistema corporativo previsto como fuente de catálogos de áreas organizacionales. Endpoints, estructura y alcance de los catálogos pendientes de confirmación técnica.",
+      "documentation" : { },
+      "id" : "12",
+      "name" : "SASSIP - Sistema de Asistencia",
+      "properties" : {
+        "structurizr.dsl.identifier" : "sassip"
+      },
+      "tags" : "Element,Software System,External System"
+    }, {
+      "description" : "Servicio utilizado para envío de notificaciones, revisión externa y solicitudes de firma.",
+      "documentation" : { },
+      "id" : "13",
+      "name" : "Servicio de Correo Corporativo",
+      "properties" : {
+        "structurizr.dsl.identifier" : "correo"
+      },
+      "relationships" : [ {
+        "description" : "Envía solicitudes de firma",
+        "destinationId" : "5",
+        "id" : "50",
+        "sourceId" : "13",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Envía liga de acceso al documento",
+        "destinationId" : "9",
+        "id" : "51",
+        "sourceId" : "13",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Notifica la liberación del procedimiento",
+        "destinationId" : "1",
+        "id" : "52",
+        "sourceId" : "13",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System,External System"
+    }, {
+      "description" : "Tablero del área de Desempeño que calcula y visualiza los indicadores del proceso documental a partir de los datos de la plataforma.",
+      "documentation" : { },
+      "id" : "14",
+      "name" : "Tablero de Indicadores de Desempeño",
+      "properties" : {
+        "structurizr.dsl.identifier" : "tableroDesempeno"
+      },
+      "relationships" : [ {
+        "description" : "Consume datos de liberación, tiempos y cumplimiento",
+        "destinationId" : "15",
+        "id" : "53",
+        "sourceId" : "14",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Consulta datos de indicadores",
+        "destinationId" : "17",
+        "id" : "74",
+        "sourceId" : "14",
+        "tags" : "Relationship",
+        "technology" : "REST/JSON sobre HTTPS"
+      } ],
+      "tags" : "Element,Software System,External System"
+    }, {
+      "containers" : [ {
+        "description" : "Interfaz web utilizada por usuarios internos y externos.",
+        "documentation" : { },
+        "id" : "16",
+        "name" : "Aplicación Web",
+        "properties" : {
+          "structurizr.dsl.identifier" : "web"
+        },
+        "relationships" : [ {
+          "description" : "Consume servicios",
+          "destinationId" : "17",
+          "id" : "62",
+          "sourceId" : "16",
+          "tags" : "Relationship",
+          "technology" : "REST/JSON sobre HTTPS"
+        }, {
+          "description" : "Solicita autenticación",
+          "destinationId" : "18",
+          "id" : "75",
+          "sourceId" : "16",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Gestiona solicitudes",
+          "destinationId" : "19",
+          "id" : "76",
+          "sourceId" : "16",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Gestiona actividades",
+          "destinationId" : "21",
+          "id" : "77",
+          "sourceId" : "16",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Carga y consulta documentos",
+          "destinationId" : "22",
+          "id" : "78",
+          "sourceId" : "16",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Ejecuta revisiones",
+          "destinationId" : "23",
+          "id" : "79",
+          "sourceId" : "16",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Firma o rechaza documentos",
+          "destinationId" : "24",
+          "id" : "80",
+          "sourceId" : "16",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Gestiona nomenclaturas",
+          "destinationId" : "25",
+          "id" : "81",
+          "sourceId" : "16",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Consulta documentos",
+          "destinationId" : "27",
+          "id" : "82",
+          "sourceId" : "16",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Administra roles y permisos",
+          "destinationId" : "28",
+          "id" : "83",
+          "sourceId" : "16",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Consulta indicadores",
+          "destinationId" : "31",
+          "id" : "84",
+          "sourceId" : "16",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "React / Vue / Angular"
+      }, {
+        "components" : [ {
+          "description" : "Gestiona sesiones, autenticación mediante el servicio de Login Kiosko y acceso de usuarios externos.",
+          "documentation" : { },
+          "id" : "18",
+          "name" : "Módulo de Autenticación",
+          "properties" : {
+            "structurizr.dsl.identifier" : "auth"
+          },
+          "relationships" : [ {
+            "description" : "Valida credenciales internas",
+            "destinationId" : "11",
+            "id" : "85",
+            "sourceId" : "18",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Gestiona creación, autorización, regreso y seguimiento de solicitudes.",
+          "documentation" : { },
+          "id" : "19",
+          "name" : "Módulo de Solicitudes",
+          "properties" : {
+            "structurizr.dsl.identifier" : "solicitudes"
+          },
+          "relationships" : [ {
+            "description" : "Inicia y actualiza flujo",
+            "destinationId" : "20",
+            "id" : "86",
+            "sourceId" : "19",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Genera asignación y plan de trabajo",
+            "destinationId" : "21",
+            "id" : "87",
+            "sourceId" : "19",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Registra eventos",
+            "destinationId" : "32",
+            "id" : "88",
+            "sourceId" : "19",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Controla los cambios de estado del procedimiento y del documento.",
+          "documentation" : { },
+          "id" : "20",
+          "name" : "Motor de Workflow",
+          "properties" : {
+            "structurizr.dsl.identifier" : "workflow"
+          },
+          "relationships" : [ {
+            "description" : "Solicita publicación o movimiento documental",
+            "destinationId" : "27",
+            "id" : "101",
+            "sourceId" : "20",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Genera eventos asíncronos",
+            "destinationId" : "37",
+            "id" : "102",
+            "sourceId" : "20",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Gestiona tareas, actividades, fechas, prioridades, complejidad y avance.",
+          "documentation" : { },
+          "id" : "21",
+          "name" : "Plan de Trabajo y Sprint",
+          "properties" : {
+            "structurizr.dsl.identifier" : "tareas"
+          },
+          "relationships" : [ {
+            "description" : "Relaciona trabajo con documento",
+            "destinationId" : "22",
+            "id" : "89",
+            "sourceId" : "21",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Registra cambios",
+            "destinationId" : "32",
+            "id" : "90",
+            "sourceId" : "21",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Administra documentos, versiones de trabajo, carga, consulta y metadatos.",
+          "documentation" : { },
+          "id" : "22",
+          "name" : "Gestión Documental",
+          "properties" : {
+            "structurizr.dsl.identifier" : "documentos"
+          },
+          "relationships" : [ {
+            "description" : "Almacena archivos",
+            "destinationId" : "36",
+            "id" : "91",
+            "sourceId" : "22",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Persiste metadatos",
+            "destinationId" : "35",
+            "id" : "92",
+            "sourceId" : "22",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Registra versiones",
+            "destinationId" : "32",
+            "id" : "93",
+            "sourceId" : "22",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Gestiona revisión del Coordinador y revisión externa.",
+          "documentation" : { },
+          "id" : "23",
+          "name" : "Módulo de Revisión",
+          "properties" : {
+            "structurizr.dsl.identifier" : "revision"
+          },
+          "relationships" : [ {
+            "description" : "Actualiza estado del documento",
+            "destinationId" : "20",
+            "id" : "94",
+            "sourceId" : "23",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Consulta versión vigente",
+            "destinationId" : "22",
+            "id" : "95",
+            "sourceId" : "23",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Genera notificación",
+            "destinationId" : "33",
+            "id" : "96",
+            "sourceId" : "23",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Administra las etapas secuenciales de Revisor y Autorizador y la validación sustitutiva.",
+          "documentation" : { },
+          "id" : "24",
+          "name" : "Módulo de Firmas",
+          "properties" : {
+            "structurizr.dsl.identifier" : "firmas"
+          },
+          "relationships" : [ {
+            "description" : "Registra firma, rechazo y actualiza flujo",
+            "destinationId" : "20",
+            "id" : "97",
+            "sourceId" : "24",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Consulta documento",
+            "destinationId" : "22",
+            "id" : "98",
+            "sourceId" : "24",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Registra firma o rechazo",
+            "destinationId" : "32",
+            "id" : "99",
+            "sourceId" : "24",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Genera notificación",
+            "destinationId" : "33",
+            "id" : "100",
+            "sourceId" : "24",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Genera y administra nomenclaturas activas, bajas y reutilizables.",
+          "documentation" : { },
+          "id" : "25",
+          "name" : "Módulo de Nomenclaturas",
+          "properties" : {
+            "structurizr.dsl.identifier" : "nomenclaturas"
+          },
+          "relationships" : [ {
+            "description" : "Consulta consecutivos y nomenclaturas",
+            "destinationId" : "35",
+            "id" : "103",
+            "sourceId" : "25",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Registra alta, reutilización o baja",
+            "destinationId" : "32",
+            "id" : "104",
+            "sourceId" : "25",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Gestiona folios del concentrado documental y datos de liberación.",
+          "documentation" : { },
+          "id" : "26",
+          "name" : "Módulo de Folios y Concentrado",
+          "properties" : {
+            "structurizr.dsl.identifier" : "concentrado"
+          },
+          "relationships" : [ {
+            "description" : "Gestiona folios y concentrado",
+            "destinationId" : "35",
+            "id" : "105",
+            "sourceId" : "26",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Controla documentos Vigentes, Obsoletos y Dados de Baja.",
+          "documentation" : { },
+          "id" : "27",
+          "name" : "Gestor de Repositorios",
+          "properties" : {
+            "structurizr.dsl.identifier" : "repositorios"
+          },
+          "relationships" : [ {
+            "description" : "Gestiona documentos físicos",
+            "destinationId" : "36",
+            "id" : "106",
+            "sourceId" : "27",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Actualiza estatus documental",
+            "destinationId" : "35",
+            "id" : "107",
+            "sourceId" : "27",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Registra publicación, obsolescencia o baja",
+            "destinationId" : "32",
+            "id" : "108",
+            "sourceId" : "27",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Administra perfiles, permisos funcionales y módulos accesibles.",
+          "documentation" : { },
+          "id" : "28",
+          "name" : "Módulo de Roles y Permisos",
+          "properties" : {
+            "structurizr.dsl.identifier" : "permisos"
+          },
+          "relationships" : [ {
+            "description" : "Gestiona roles y permisos",
+            "destinationId" : "35",
+            "id" : "109",
+            "sourceId" : "28",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Evalúa estatus, asignaciones especiales, categoría, puesto, área y permisos.",
+          "documentation" : { },
+          "id" : "29",
+          "name" : "Control de Acceso Documental",
+          "properties" : {
+            "structurizr.dsl.identifier" : "accesoDocumental"
+          },
+          "relationships" : [ {
+            "description" : "Consulta permisos",
+            "destinationId" : "28",
+            "id" : "110",
+            "sourceId" : "29",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Consulta puesto, área, categoría y asignaciones",
+            "destinationId" : "35",
+            "id" : "111",
+            "sourceId" : "29",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Registra la apertura de documentos y calcula cumplimiento documental.",
+          "documentation" : { },
+          "id" : "30",
+          "name" : "Control de Lectura",
+          "properties" : {
+            "structurizr.dsl.identifier" : "lectura"
+          },
+          "relationships" : [ {
+            "description" : "Registra aperturas",
+            "destinationId" : "35",
+            "id" : "112",
+            "sourceId" : "30",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Proporciona métricas de lectura",
+            "destinationId" : "31",
+            "id" : "113",
+            "sourceId" : "30",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Calcula métricas de liberación, tiempos, cumplimiento y productividad.",
+          "documentation" : { },
+          "id" : "31",
+          "name" : "Módulo de Indicadores",
+          "properties" : {
+            "structurizr.dsl.identifier" : "indicadores"
+          },
+          "relationships" : [ {
+            "description" : "Consulta información operacional",
+            "destinationId" : "35",
+            "id" : "114",
+            "sourceId" : "31",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Registra eventos relevantes y trazabilidad de las operaciones.",
+          "documentation" : { },
+          "id" : "32",
+          "name" : "Servicio de Auditoría",
+          "properties" : {
+            "structurizr.dsl.identifier" : "auditoria"
+          },
+          "relationships" : [ {
+            "description" : "Persiste trazabilidad",
+            "destinationId" : "35",
+            "id" : "115",
+            "sourceId" : "32",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Genera solicitudes de notificación y correo para eventos del workflow.",
+          "documentation" : { },
+          "id" : "33",
+          "name" : "Servicio de Notificaciones",
+          "properties" : {
+            "structurizr.dsl.identifier" : "notificaciones"
+          },
+          "relationships" : [ {
+            "description" : "Publica mensajes de notificación",
+            "destinationId" : "37",
+            "id" : "116",
+            "sourceId" : "33",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        } ],
+        "description" : "Implementa reglas de negocio, workflow documental, seguridad, solicitudes y publicación.",
+        "documentation" : { },
+        "id" : "17",
+        "name" : "Backend API",
+        "properties" : {
+          "structurizr.dsl.identifier" : "api"
+        },
+        "relationships" : [ {
+          "description" : "Consulta y persiste información",
+          "destinationId" : "35",
+          "id" : "63",
+          "sourceId" : "17",
+          "tags" : "Relationship",
+          "technology" : "SQL"
+        }, {
+          "description" : "Carga y consulta documentos",
+          "destinationId" : "36",
+          "id" : "64",
+          "sourceId" : "17",
+          "tags" : "Relationship",
+          "technology" : "HTTPS / S3 API"
+        }, {
+          "description" : "Publica tareas asíncronas",
+          "destinationId" : "37",
+          "id" : "65",
+          "sourceId" : "17",
+          "tags" : "Relationship",
+          "technology" : "Broker de mensajes"
+        }, {
+          "description" : "Autentica usuarios internos y obtiene datos del colaborador",
+          "destinationId" : "11",
+          "id" : "69",
+          "sourceId" : "17",
+          "tags" : "Relationship",
+          "technology" : "API corporativa / HTTPS"
+        }, {
+          "description" : "Consulta catálogos de áreas organizacionales (contrato por confirmar)",
+          "destinationId" : "12",
+          "id" : "70",
+          "sourceId" : "17",
+          "tags" : "Relationship",
+          "technology" : "API corporativa (por confirmar)"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Laravel / .NET / Spring Boot"
+      }, {
+        "description" : "Procesa tareas en segundo plano como notificaciones, publicación documental e indicadores.",
+        "documentation" : { },
+        "id" : "34",
+        "name" : "Worker Asíncrono",
+        "properties" : {
+          "structurizr.dsl.identifier" : "worker"
+        },
+        "relationships" : [ {
+          "description" : "Consume mensajes",
+          "destinationId" : "37",
+          "id" : "66",
+          "sourceId" : "34",
+          "tags" : "Relationship",
+          "technology" : "Broker de mensajes"
+        }, {
+          "description" : "Consulta y actualiza datos",
+          "destinationId" : "35",
+          "id" : "67",
+          "sourceId" : "34",
+          "tags" : "Relationship",
+          "technology" : "SQL"
+        }, {
+          "description" : "Gestiona archivos",
+          "destinationId" : "36",
+          "id" : "68",
+          "sourceId" : "34",
+          "tags" : "Relationship",
+          "technology" : "S3 API"
+        }, {
+          "description" : "Envía notificaciones",
+          "destinationId" : "13",
+          "id" : "71",
+          "sourceId" : "34",
+          "tags" : "Relationship",
+          "technology" : "SMTP / API"
+        }, {
+          "description" : "Procesa notificaciones",
+          "destinationId" : "33",
+          "id" : "117",
+          "sourceId" : "34",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Procesa notificaciones",
+          "destinationId" : "17",
+          "id" : "118",
+          "linkedRelationshipId" : "117",
+          "sourceId" : "34"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Worker / Queue Consumer"
+      }, {
+        "description" : "Almacena solicitudes, tareas, documentos, versiones, firmas, permisos, auditoría e indicadores.",
+        "documentation" : { },
+        "id" : "35",
+        "name" : "Base de Datos",
+        "properties" : {
+          "structurizr.dsl.identifier" : "db"
+        },
+        "tags" : "Element,Container,Database",
+        "technology" : "PostgreSQL"
+      }, {
+        "description" : "Almacena documentos, versiones, evidencias y archivos asociados.",
+        "documentation" : { },
+        "id" : "36",
+        "name" : "Repositorio de Archivos",
+        "properties" : {
+          "structurizr.dsl.identifier" : "storage"
+        },
+        "tags" : "Element,Container,Storage",
+        "technology" : "Amazon S3"
+      }, {
+        "description" : "Desacopla tareas asíncronas del flujo transaccional.",
+        "documentation" : { },
+        "id" : "37",
+        "name" : "Broker de Mensajes",
+        "properties" : {
+          "structurizr.dsl.identifier" : "queue"
+        },
+        "tags" : "Element,Container,Queue",
+        "technology" : "Redis"
+      } ],
+      "description" : "Gestiona solicitudes, documentación, revisiones, firmas, nomenclaturas, repositorios, permisos e indicadores.",
+      "documentation" : { },
+      "id" : "15",
+      "name" : "Plataforma de Procesos",
+      "properties" : {
+        "structurizr.dsl.identifier" : "plataforma"
+      },
+      "relationships" : [ {
+        "description" : "Valida el acceso de colaboradores internos y obtiene datos básicos del usuario",
+        "destinationId" : "11",
+        "id" : "47",
+        "sourceId" : "15",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Consulta catálogos de áreas organizacionales",
+        "destinationId" : "12",
+        "id" : "48",
+        "sourceId" : "15",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Envía notificaciones, ligas de revisión y solicitudes de firma",
+        "destinationId" : "13",
+        "id" : "49",
+        "sourceId" : "15",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    } ]
+  },
+  "name" : "Plataforma de Procesos",
+  "properties" : {
+    "structurizr.inspection.error" : "65",
+    "structurizr.dsl" : "d29ya3NwYWNlICJQbGF0YWZvcm1hIGRlIFByb2Nlc29zIiAiQXJxdWl0ZWN0dXJhIEM0IGRlIGxhIFBsYXRhZm9ybWEgZGUgUHJvY2Vzb3MgQkJQLUdBLVBQLTIwNSIgewoJCgltb2RlbCB7CgkJCgkJLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CgkJLy8gUEVSU09OQVMKCQkvLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KCQkKCQlzb2xpY2l0YW50ZSA9IHBlcnNvbiAiUmVzcG9uc2FibGUgZGUgw4FyZWEiICJHZW5lcmEgc29saWNpdHVkZXMgZGUgY3JlYWNpw7NuIG8gYWN0dWFsaXphY2nDs24gZGUgcHJvY2VkaW1pZW50b3MgeSBwYXJ0aWNpcGEgZW4gZWwgdmlzdG8gYnVlbm8uIgoJCQoJCWFuYWxpc3RhID0gcGVyc29uICJBbmFsaXN0YSBkZSBQcm9jZXNvcyIgIkdlc3Rpb25hIGVsIHBsYW4gZGUgdHJhYmFqbywgc3ByaW50cywgZG9jdW1lbnRhY2nDs24geSB2ZXJzaW9uZXMgZGUgdHJhYmFqby4iCgkJCgkJY29vcmRpbmFkb3IgPSBwZXJzb24gIkNvb3JkaW5hZG9yIGRlIFByb2Nlc29zIiAiUmV2aXNhIHkgdmFsaWRhIGRvY3VtZW50b3MgeSBjb250cm9sYSBlbCBhdmFuY2UgZGVsIHByb2NlZGltaWVudG8uIgoJCQoJCWplZmVQcm9jZXNvcyA9IHBlcnNvbiAiSmVmZSBkZSBQcm9jZXNvcyIgIkFkbWluaXN0cmEgc29saWNpdHVkZXMsIG5vbWVuY2xhdHVyYXMsIHVzdWFyaW9zLCBwZXJtaXNvcyB5IGxpYmVyYWNpb25lcyBkb2N1bWVudGFsZXMuIgoJCQoJCWZpcm1hbnRlID0gcGVyc29uICJSZXZpc29yIC8gQXV0b3JpemFkb3IiICJSZXZpc2EsIGF1dG9yaXphIG8gcmVjaGF6YSBkb2N1bWVudG9zIGRlbnRybyBkZWwgZmx1am8gZGUgZmlybWEuIgoJCQoJCWNvbGFib3JhZG9yID0gcGVyc29uICJDb2xhYm9yYWRvciBHUyIgIkNvbnN1bHRhIGRvY3VtZW50b3MgdmlnZW50ZXMgZGUgYWN1ZXJkbyBjb24gc3VzIHBlcm1pc29zIHkgY2F0ZWdvcsOtYSBkb2N1bWVudGFsLiIKCQkKCQkvLyBQZXJzb25hcyBudWV2YXMKCQlleHRlcm5vID0gcGVyc29uICJVc3VhcmlvIEV4dGVybm8iICJDb25zdWx0YSBkb2N1bWVudG9zIHB1YmxpY2Fkb3MgcXVlIGxlIGhheWFuIHNpZG8gYXNpZ25hZG9zIGV4cGzDrWNpdGFtZW50ZS4iCgkJZ2VyZW50ZUFkbWluID0gcGVyc29uICJHZXJlbnRlIEFkbWluaXN0cmF0aXZvIiAiQXBydWViYSBlbCBQcm9ncmFtYSBBbnVhbCBkZSBhY3R1YWxpemFjacOzbiB5IGFkbWluaXN0cmEgcm9sZXMgeSBwZXJtaXNvcy4iCgkJcmV2aXNvckV4dGVybm8gPSBwZXJzb24gIlJldmlzb3IgRXh0ZXJubyIgIlJldmlzYSBkb2N1bWVudG9zIG1lZGlhbnRlIHVuYSBsaWdhIGVudmlhZGEgcG9yIGNvcnJlbyB5IGVtaXRlIGNvbWVudGFyaW9zIG8gdmlzdG8gYnVlbm8uIgoJCWRlc2VtcGVubyA9IHBlcnNvbiAiw4FyZWEgZGUgRGVzZW1wZcOxbyIgIkRlZmluZSBtZXRhcyB5IHVtYnJhbGVzIGRlIGxvcyBpbmRpY2Fkb3JlcyBjYWxjdWxhZG9zIGNvbiBsb3MgZGF0b3MgZGUgbGEgcGxhdGFmb3JtYS4iCgkJCgkJLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CgkJLy8gU0lTVEVNQVMgRVhURVJOT1MKCQkvLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KCQkKCQkKCQlraW9za28gPSBzb2Z0d2FyZVN5c3RlbSAiU2VydmljaW8gZGUgTG9naW4gS2lvc2tvIiAiU2VydmljaW8gY29ycG9yYXRpdm8gZGUgYXV0ZW50aWNhY2nDs24gZGUgdXN1YXJpb3MgaW50ZXJub3MuIFN1IHJlc3B1ZXN0YSBpbmNsdXllIGlkZW50aWZpY2Fkb3IsIG7Ds21pbmEsIG5vbWJyZSwgZGVwYXJ0YW1lbnRvLCBwdWVzdG8sIGNvcnJlbyB5IGVzdGF0dXMgZGVsIGNvbGFib3JhZG9yLiIgIkV4dGVybmFsIFN5c3RlbSIKCQkKCQlzYXNzaXAgPSBzb2Z0d2FyZVN5c3RlbSAiU0FTU0lQIC0gU2lzdGVtYSBkZSBBc2lzdGVuY2lhIiAiU2lzdGVtYSBjb3Jwb3JhdGl2byBwcmV2aXN0byBjb21vIGZ1ZW50ZSBkZSBjYXTDoWxvZ29zIGRlIMOhcmVhcyBvcmdhbml6YWNpb25hbGVzLiBFbmRwb2ludHMsIGVzdHJ1Y3R1cmEgeSBhbGNhbmNlIGRlIGxvcyBjYXTDoWxvZ29zIHBlbmRpZW50ZXMgZGUgY29uZmlybWFjacOzbiB0w6ljbmljYS4iICJFeHRlcm5hbCBTeXN0ZW0iCgkJCgkJY29ycmVvID0gc29mdHdhcmVTeXN0ZW0gIlNlcnZpY2lvIGRlIENvcnJlbyBDb3Jwb3JhdGl2byIgIlNlcnZpY2lvIHV0aWxpemFkbyBwYXJhIGVudsOtbyBkZSBub3RpZmljYWNpb25lcywgcmV2aXNpw7NuIGV4dGVybmEgeSBzb2xpY2l0dWRlcyBkZSBmaXJtYS4iICJFeHRlcm5hbCBTeXN0ZW0iCgkJLy8gU2lzdGVtYSBleHRlcm5vIG51ZXZvCgkJdGFibGVyb0Rlc2VtcGVubyA9IHNvZnR3YXJlU3lzdGVtICJUYWJsZXJvIGRlIEluZGljYWRvcmVzIGRlIERlc2VtcGXDsW8iICJUYWJsZXJvIGRlbCDDoXJlYSBkZSBEZXNlbXBlw7FvIHF1ZSBjYWxjdWxhIHkgdmlzdWFsaXphIGxvcyBpbmRpY2Fkb3JlcyBkZWwgcHJvY2VzbyBkb2N1bWVudGFsIGEgcGFydGlyIGRlIGxvcyBkYXRvcyBkZSBsYSBwbGF0YWZvcm1hLiIgewoJCQl0YWdzICJFeHRlcm5hbCBTeXN0ZW0iCgkJfQoJCQoJCS8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQoJCS8vIFNJU1RFTUEgUFJJTkNJUEFMCgkJLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CgkJCgkJcGxhdGFmb3JtYSA9IHNvZnR3YXJlU3lzdGVtICJQbGF0YWZvcm1hIGRlIFByb2Nlc29zIiAiR2VzdGlvbmEgc29saWNpdHVkZXMsIGRvY3VtZW50YWNpw7NuLCByZXZpc2lvbmVzLCBmaXJtYXMsIG5vbWVuY2xhdHVyYXMsIHJlcG9zaXRvcmlvcywgcGVybWlzb3MgZSBpbmRpY2Fkb3Jlcy4iIHsKCQkJCgkJCS8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CgkJCS8vIENPTlRFTkVET1JFUyBDMgoJCQkvLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQoJCQkKCQkJd2ViID0gY29udGFpbmVyICJBcGxpY2FjacOzbiBXZWIiICJJbnRlcmZheiB3ZWIgdXRpbGl6YWRhIHBvciB1c3VhcmlvcyBpbnRlcm5vcyB5IGV4dGVybm9zLiIgIlJlYWN0IC8gVnVlIC8gQW5ndWxhciIKCQkJCgkJCWFwaSA9IGNvbnRhaW5lciAiQmFja2VuZCBBUEkiICJJbXBsZW1lbnRhIHJlZ2xhcyBkZSBuZWdvY2lvLCB3b3JrZmxvdyBkb2N1bWVudGFsLCBzZWd1cmlkYWQsIHNvbGljaXR1ZGVzIHkgcHVibGljYWNpw7NuLiIgIkxhcmF2ZWwgLyAuTkVUIC8gU3ByaW5nIEJvb3QiIHsKCQkJCQoJCQkJLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQoJCQkJLy8gQ09NUE9ORU5URVMgQzMKCQkJCS8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KCQkJCQoJCQkJYXV0aCA9IGNvbXBvbmVudCAiTcOzZHVsbyBkZSBBdXRlbnRpY2FjacOzbiIgIkdlc3Rpb25hIHNlc2lvbmVzLCBhdXRlbnRpY2FjacOzbiBtZWRpYW50ZSBlbCBzZXJ2aWNpbyBkZSBMb2dpbiBLaW9za28geSBhY2Nlc28gZGUgdXN1YXJpb3MgZXh0ZXJub3MuIgoJCQkJCgkJCQlzb2xpY2l0dWRlcyA9IGNvbXBvbmVudCAiTcOzZHVsbyBkZSBTb2xpY2l0dWRlcyIgIkdlc3Rpb25hIGNyZWFjacOzbiwgYXV0b3JpemFjacOzbiwgcmVncmVzbyB5IHNlZ3VpbWllbnRvIGRlIHNvbGljaXR1ZGVzLiIKCQkJCQoJCQkJd29ya2Zsb3cgPSBjb21wb25lbnQgIk1vdG9yIGRlIFdvcmtmbG93IiAiQ29udHJvbGEgbG9zIGNhbWJpb3MgZGUgZXN0YWRvIGRlbCBwcm9jZWRpbWllbnRvIHkgZGVsIGRvY3VtZW50by4iCgkJCQkKCQkJCXRhcmVhcyA9IGNvbXBvbmVudCAiUGxhbiBkZSBUcmFiYWpvIHkgU3ByaW50IiAiR2VzdGlvbmEgdGFyZWFzLCBhY3RpdmlkYWRlcywgZmVjaGFzLCBwcmlvcmlkYWRlcywgY29tcGxlamlkYWQgeSBhdmFuY2UuIgoJCQkJCgkJCQlkb2N1bWVudG9zID0gY29tcG9uZW50ICJHZXN0acOzbiBEb2N1bWVudGFsIiAiQWRtaW5pc3RyYSBkb2N1bWVudG9zLCB2ZXJzaW9uZXMgZGUgdHJhYmFqbywgY2FyZ2EsIGNvbnN1bHRhIHkgbWV0YWRhdG9zLiIKCQkJCQoJCQkJcmV2aXNpb24gPSBjb21wb25lbnQgIk3Ds2R1bG8gZGUgUmV2aXNpw7NuIiAiR2VzdGlvbmEgcmV2aXNpw7NuIGRlbCBDb29yZGluYWRvciB5IHJldmlzacOzbiBleHRlcm5hLiIKCQkJCQoJCQkJZmlybWFzID0gY29tcG9uZW50ICJNw7NkdWxvIGRlIEZpcm1hcyIgIkFkbWluaXN0cmEgbGFzIGV0YXBhcyBzZWN1ZW5jaWFsZXMgZGUgUmV2aXNvciB5IEF1dG9yaXphZG9yIHkgbGEgdmFsaWRhY2nDs24gc3VzdGl0dXRpdmEuIgoJCQkJCgkJCQlub21lbmNsYXR1cmFzID0gY29tcG9uZW50ICJNw7NkdWxvIGRlIE5vbWVuY2xhdHVyYXMiICJHZW5lcmEgeSBhZG1pbmlzdHJhIG5vbWVuY2xhdHVyYXMgYWN0aXZhcywgYmFqYXMgeSByZXV0aWxpemFibGVzLiIKCQkJCQoJCQkJY29uY2VudHJhZG8gPSBjb21wb25lbnQgIk3Ds2R1bG8gZGUgRm9saW9zIHkgQ29uY2VudHJhZG8iICJHZXN0aW9uYSBmb2xpb3MgZGVsIGNvbmNlbnRyYWRvIGRvY3VtZW50YWwgeSBkYXRvcyBkZSBsaWJlcmFjacOzbi4iCgkJCQkKCQkJCXJlcG9zaXRvcmlvcyA9IGNvbXBvbmVudCAiR2VzdG9yIGRlIFJlcG9zaXRvcmlvcyIgIkNvbnRyb2xhIGRvY3VtZW50b3MgVmlnZW50ZXMsIE9ic29sZXRvcyB5IERhZG9zIGRlIEJhamEuIgoJCQkJCgkJCQlwZXJtaXNvcyA9IGNvbXBvbmVudCAiTcOzZHVsbyBkZSBSb2xlcyB5IFBlcm1pc29zIiAiQWRtaW5pc3RyYSBwZXJmaWxlcywgcGVybWlzb3MgZnVuY2lvbmFsZXMgeSBtw7NkdWxvcyBhY2Nlc2libGVzLiIKCQkJCQoJCQkJYWNjZXNvRG9jdW1lbnRhbCA9IGNvbXBvbmVudCAiQ29udHJvbCBkZSBBY2Nlc28gRG9jdW1lbnRhbCIgIkV2YWzDumEgZXN0YXR1cywgYXNpZ25hY2lvbmVzIGVzcGVjaWFsZXMsIGNhdGVnb3LDrWEsIHB1ZXN0bywgw6FyZWEgeSBwZXJtaXNvcy4iCgkJCQkKCQkJCWxlY3R1cmEgPSBjb21wb25lbnQgIkNvbnRyb2wgZGUgTGVjdHVyYSIgIlJlZ2lzdHJhIGxhIGFwZXJ0dXJhIGRlIGRvY3VtZW50b3MgeSBjYWxjdWxhIGN1bXBsaW1pZW50byBkb2N1bWVudGFsLiIKCQkJCQoJCQkJaW5kaWNhZG9yZXMgPSBjb21wb25lbnQgIk3Ds2R1bG8gZGUgSW5kaWNhZG9yZXMiICJDYWxjdWxhIG3DqXRyaWNhcyBkZSBsaWJlcmFjacOzbiwgdGllbXBvcywgY3VtcGxpbWllbnRvIHkgcHJvZHVjdGl2aWRhZC4iCgkJCQkKCQkJCWF1ZGl0b3JpYSA9IGNvbXBvbmVudCAiU2VydmljaW8gZGUgQXVkaXRvcsOtYSIgIlJlZ2lzdHJhIGV2ZW50b3MgcmVsZXZhbnRlcyB5IHRyYXphYmlsaWRhZCBkZSBsYXMgb3BlcmFjaW9uZXMuIgoJCQkJCgkJCQlub3RpZmljYWNpb25lcyA9IGNvbXBvbmVudCAiU2VydmljaW8gZGUgTm90aWZpY2FjaW9uZXMiICJHZW5lcmEgc29saWNpdHVkZXMgZGUgbm90aWZpY2FjacOzbiB5IGNvcnJlbyBwYXJhIGV2ZW50b3MgZGVsIHdvcmtmbG93LiIKCQkJfQoJCQkKCQkJd29ya2VyID0gY29udGFpbmVyICJXb3JrZXIgQXPDrW5jcm9ubyIgIlByb2Nlc2EgdGFyZWFzIGVuIHNlZ3VuZG8gcGxhbm8gY29tbyBub3RpZmljYWNpb25lcywgcHVibGljYWNpw7NuIGRvY3VtZW50YWwgZSBpbmRpY2Fkb3Jlcy4iICJXb3JrZXIgLyBRdWV1ZSBDb25zdW1lciIKCQkJCgkJCWRiID0gY29udGFpbmVyICJCYXNlIGRlIERhdG9zIiAiQWxtYWNlbmEgc29saWNpdHVkZXMsIHRhcmVhcywgZG9jdW1lbnRvcywgdmVyc2lvbmVzLCBmaXJtYXMsIHBlcm1pc29zLCBhdWRpdG9yw61hIGUgaW5kaWNhZG9yZXMuIiAiUG9zdGdyZVNRTCIgIkRhdGFiYXNlIgoJCQkKCQkJc3RvcmFnZSA9IGNvbnRhaW5lciAiUmVwb3NpdG9yaW8gZGUgQXJjaGl2b3MiICJBbG1hY2VuYSBkb2N1bWVudG9zLCB2ZXJzaW9uZXMsIGV2aWRlbmNpYXMgeSBhcmNoaXZvcyBhc29jaWFkb3MuIiAiQW1hem9uIFMzIiAiU3RvcmFnZSIKCQkJCgkJCXF1ZXVlID0gY29udGFpbmVyICJCcm9rZXIgZGUgTWVuc2FqZXMiICJEZXNhY29wbGEgdGFyZWFzIGFzw61uY3JvbmFzIGRlbCBmbHVqbyB0cmFuc2FjY2lvbmFsLiIgIlJlZGlzIiAiUXVldWUiCgkJfQoJCQoJCQoJCS8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQoJCS8vIFJFTEFDSU9ORVMgQzEKCQkvLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KCQkKCQlzb2xpY2l0YW50ZSAtPiBwbGF0YWZvcm1hICJHZW5lcmEgeSBjb25zdWx0YSBzb2xpY2l0dWRlcyIKCQlhbmFsaXN0YSAtPiBwbGF0YWZvcm1hICJHZXN0aW9uYSBkb2N1bWVudGFjacOzbiB5IHBsYW4gZGUgdHJhYmFqbyIKCQljb29yZGluYWRvciAtPiBwbGF0YWZvcm1hICJSZXZpc2EgeSB2YWxpZGEgZG9jdW1lbnRvcyIKCQlqZWZlUHJvY2Vzb3MgLT4gcGxhdGFmb3JtYSAiQWRtaW5pc3RyYSBsYSBwbGF0YWZvcm1hIHkgZWwgcHJvY2VzbyBkb2N1bWVudGFsIgoJCWZpcm1hbnRlIC0+IHBsYXRhZm9ybWEgIlJldmlzYSwgZmlybWEgbyByZWNoYXphIGRvY3VtZW50b3MiCgkJY29sYWJvcmFkb3IgLT4gcGxhdGFmb3JtYSAiQ29uc3VsdGEgZG9jdW1lbnRhY2nDs24gdmlnZW50ZSIKCQlleHRlcm5vIC0+IHBsYXRhZm9ybWEgIkNvbnN1bHRhIGRvY3VtZW50b3MgYXV0b3JpemFkb3MiCgkJZ2VyZW50ZUFkbWluIC0+IHBsYXRhZm9ybWEgIkFwcnVlYmEgZWwgcHJvZ3JhbWEgYW51YWwgeSBhZG1pbmlzdHJhIHJvbGVzIHkgcGVybWlzb3MiCgkJcmV2aXNvckV4dGVybm8gLT4gcGxhdGFmb3JtYSAiRW1pdGUgY29tZW50YXJpb3MgbyB2aXN0byBidWVubyBkZXNkZSB1bmEgbGlnYSIKCQkKCQlwbGF0YWZvcm1hIC0+IGtpb3NrbyAiVmFsaWRhIGVsIGFjY2VzbyBkZSBjb2xhYm9yYWRvcmVzIGludGVybm9zIHkgb2J0aWVuZSBkYXRvcyBiw6FzaWNvcyBkZWwgdXN1YXJpbyIKCQlwbGF0YWZvcm1hIC0+IHNhc3NpcCAiQ29uc3VsdGEgY2F0w6Fsb2dvcyBkZSDDoXJlYXMgb3JnYW5pemFjaW9uYWxlcyIKCQlwbGF0YWZvcm1hIC0+IGNvcnJlbyAiRW52w61hIG5vdGlmaWNhY2lvbmVzLCBsaWdhcyBkZSByZXZpc2nDs24geSBzb2xpY2l0dWRlcyBkZSBmaXJtYSIKCQljb3JyZW8gLT4gZmlybWFudGUgIkVudsOtYSBzb2xpY2l0dWRlcyBkZSBmaXJtYSIKCQljb3JyZW8gLT4gcmV2aXNvckV4dGVybm8gIkVudsOtYSBsaWdhIGRlIGFjY2VzbyBhbCBkb2N1bWVudG8iCgkJY29ycmVvIC0+IHNvbGljaXRhbnRlICJOb3RpZmljYSBsYSBsaWJlcmFjacOzbiBkZWwgcHJvY2VkaW1pZW50byIKCQl0YWJsZXJvRGVzZW1wZW5vIC0+IHBsYXRhZm9ybWEgIkNvbnN1bWUgZGF0b3MgZGUgbGliZXJhY2nDs24sIHRpZW1wb3MgeSBjdW1wbGltaWVudG8iCgkJZGVzZW1wZW5vIC0+IHRhYmxlcm9EZXNlbXBlbm8gIkRlZmluZSBtZXRhcyB5IHVtYnJhbGVzLCBjb25zdWx0YSBpbmRpY2Fkb3JlcyIKCQkKCQkvLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KCQkvLyBSRUxBQ0lPTkVTIEMyCgkJLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CgkJCgkJc29saWNpdGFudGUgLT4gd2ViICJVdGlsaXphIiAiSFRUUFMiCgkJYW5hbGlzdGEgLT4gd2ViICJVdGlsaXphIiAiSFRUUFMiCgkJY29vcmRpbmFkb3IgLT4gd2ViICJVdGlsaXphIiAiSFRUUFMiCgkJamVmZVByb2Nlc29zIC0+IHdlYiAiVXRpbGl6YSIgIkhUVFBTIgoJCWZpcm1hbnRlIC0+IHdlYiAiVXRpbGl6YSIgIkhUVFBTIgoJCWNvbGFib3JhZG9yIC0+IHdlYiAiVXRpbGl6YSIgIkhUVFBTIgoJCWV4dGVybm8gLT4gd2ViICJVdGlsaXphIiAiSFRUUFMiCgkJd2ViIC0+IGFwaSAiQ29uc3VtZSBzZXJ2aWNpb3MiICJSRVNUL0pTT04gc29icmUgSFRUUFMiCgkJYXBpIC0+IGRiICJDb25zdWx0YSB5IHBlcnNpc3RlIGluZm9ybWFjacOzbiIgIlNRTCIKCQlhcGkgLT4gc3RvcmFnZSAiQ2FyZ2EgeSBjb25zdWx0YSBkb2N1bWVudG9zIiAiSFRUUFMgLyBTMyBBUEkiCgkJYXBpIC0+IHF1ZXVlICJQdWJsaWNhIHRhcmVhcyBhc8OtbmNyb25hcyIgIkJyb2tlciBkZSBtZW5zYWplcyIKCQkKCQl3b3JrZXIgLT4gcXVldWUgIkNvbnN1bWUgbWVuc2FqZXMiICJCcm9rZXIgZGUgbWVuc2FqZXMiCgkJd29ya2VyIC0+IGRiICJDb25zdWx0YSB5IGFjdHVhbGl6YSBkYXRvcyIgIlNRTCIKCQl3b3JrZXIgLT4gc3RvcmFnZSAiR2VzdGlvbmEgYXJjaGl2b3MiICJTMyBBUEkiCgkJCgkJYXBpIC0+IGtpb3NrbyAiQXV0ZW50aWNhIHVzdWFyaW9zIGludGVybm9zIHkgb2J0aWVuZSBkYXRvcyBkZWwgY29sYWJvcmFkb3IiICJBUEkgY29ycG9yYXRpdmEgLyBIVFRQUyIKCQlhcGkgLT4gc2Fzc2lwICJDb25zdWx0YSBjYXTDoWxvZ29zIGRlIMOhcmVhcyBvcmdhbml6YWNpb25hbGVzIChjb250cmF0byBwb3IgY29uZmlybWFyKSIgIkFQSSBjb3Jwb3JhdGl2YSAocG9yIGNvbmZpcm1hcikiCgkJCgkJd29ya2VyIC0+IGNvcnJlbyAiRW52w61hIG5vdGlmaWNhY2lvbmVzIiAiU01UUCAvIEFQSSIKCQkKCQlnZXJlbnRlQWRtaW4gLT4gd2ViICJVdGlsaXphIiAiSFRUUFMiCgkJcmV2aXNvckV4dGVybm8gLT4gd2ViICJVdGlsaXphIiAiSFRUUFMiCgkJdGFibGVyb0Rlc2VtcGVubyAtPiBhcGkgIkNvbnN1bHRhIGRhdG9zIGRlIGluZGljYWRvcmVzIiAiUkVTVC9KU09OIHNvYnJlIEhUVFBTIgoJCQoJCQoJCS8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQoJCS8vIFJFTEFDSU9ORVMgQzMKCQkvLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KCQkKCQl3ZWIgLT4gYXV0aCAiU29saWNpdGEgYXV0ZW50aWNhY2nDs24iCgkJd2ViIC0+IHNvbGljaXR1ZGVzICJHZXN0aW9uYSBzb2xpY2l0dWRlcyIKCQl3ZWIgLT4gdGFyZWFzICJHZXN0aW9uYSBhY3RpdmlkYWRlcyIKCQl3ZWIgLT4gZG9jdW1lbnRvcyAiQ2FyZ2EgeSBjb25zdWx0YSBkb2N1bWVudG9zIgoJCXdlYiAtPiByZXZpc2lvbiAiRWplY3V0YSByZXZpc2lvbmVzIgoJCXdlYiAtPiBmaXJtYXMgIkZpcm1hIG8gcmVjaGF6YSBkb2N1bWVudG9zIgoJCXdlYiAtPiBub21lbmNsYXR1cmFzICJHZXN0aW9uYSBub21lbmNsYXR1cmFzIgoJCXdlYiAtPiByZXBvc2l0b3Jpb3MgIkNvbnN1bHRhIGRvY3VtZW50b3MiCgkJd2ViIC0+IHBlcm1pc29zICJBZG1pbmlzdHJhIHJvbGVzIHkgcGVybWlzb3MiCgkJd2ViIC0+IGluZGljYWRvcmVzICJDb25zdWx0YSBpbmRpY2Fkb3JlcyIKCQkKCQlhdXRoIC0+IGtpb3NrbyAiVmFsaWRhIGNyZWRlbmNpYWxlcyBpbnRlcm5hcyIKCQkKCQlzb2xpY2l0dWRlcyAtPiB3b3JrZmxvdyAiSW5pY2lhIHkgYWN0dWFsaXphIGZsdWpvIgoJCXNvbGljaXR1ZGVzIC0+IHRhcmVhcyAiR2VuZXJhIGFzaWduYWNpw7NuIHkgcGxhbiBkZSB0cmFiYWpvIgoJCXNvbGljaXR1ZGVzIC0+IGF1ZGl0b3JpYSAiUmVnaXN0cmEgZXZlbnRvcyIKCQkKCQl0YXJlYXMgLT4gZG9jdW1lbnRvcyAiUmVsYWNpb25hIHRyYWJham8gY29uIGRvY3VtZW50byIKCQl0YXJlYXMgLT4gYXVkaXRvcmlhICJSZWdpc3RyYSBjYW1iaW9zIgoJCQoJCWRvY3VtZW50b3MgLT4gc3RvcmFnZSAiQWxtYWNlbmEgYXJjaGl2b3MiCgkJZG9jdW1lbnRvcyAtPiBkYiAiUGVyc2lzdGUgbWV0YWRhdG9zIgoJCWRvY3VtZW50b3MgLT4gYXVkaXRvcmlhICJSZWdpc3RyYSB2ZXJzaW9uZXMiCgkJCgkJcmV2aXNpb24gLT4gd29ya2Zsb3cgIkFjdHVhbGl6YSBlc3RhZG8gZGVsIGRvY3VtZW50byIKCQlyZXZpc2lvbiAtPiBkb2N1bWVudG9zICJDb25zdWx0YSB2ZXJzacOzbiB2aWdlbnRlIgoJCXJldmlzaW9uIC0+IG5vdGlmaWNhY2lvbmVzICJHZW5lcmEgbm90aWZpY2FjacOzbiIKCQkKCQlmaXJtYXMgLT4gd29ya2Zsb3cgIlJlZ2lzdHJhIGZpcm1hLCByZWNoYXpvIHkgYWN0dWFsaXphIGZsdWpvIgoJCWZpcm1hcyAtPiBkb2N1bWVudG9zICJDb25zdWx0YSBkb2N1bWVudG8iCgkJZmlybWFzIC0+IGF1ZGl0b3JpYSAiUmVnaXN0cmEgZmlybWEgbyByZWNoYXpvIgoJCWZpcm1hcyAtPiBub3RpZmljYWNpb25lcyAiR2VuZXJhIG5vdGlmaWNhY2nDs24iCgkJCgkJd29ya2Zsb3cgLT4gcmVwb3NpdG9yaW9zICJTb2xpY2l0YSBwdWJsaWNhY2nDs24gbyBtb3ZpbWllbnRvIGRvY3VtZW50YWwiCgkJd29ya2Zsb3cgLT4gcXVldWUgIkdlbmVyYSBldmVudG9zIGFzw61uY3Jvbm9zIgoJCQoJCW5vbWVuY2xhdHVyYXMgLT4gZGIgIkNvbnN1bHRhIGNvbnNlY3V0aXZvcyB5IG5vbWVuY2xhdHVyYXMiCgkJbm9tZW5jbGF0dXJhcyAtPiBhdWRpdG9yaWEgIlJlZ2lzdHJhIGFsdGEsIHJldXRpbGl6YWNpw7NuIG8gYmFqYSIKCQkKCQljb25jZW50cmFkbyAtPiBkYiAiR2VzdGlvbmEgZm9saW9zIHkgY29uY2VudHJhZG8iCgkJCgkJcmVwb3NpdG9yaW9zIC0+IHN0b3JhZ2UgIkdlc3Rpb25hIGRvY3VtZW50b3MgZsOtc2ljb3MiCgkJcmVwb3NpdG9yaW9zIC0+IGRiICJBY3R1YWxpemEgZXN0YXR1cyBkb2N1bWVudGFsIgoJCXJlcG9zaXRvcmlvcyAtPiBhdWRpdG9yaWEgIlJlZ2lzdHJhIHB1YmxpY2FjacOzbiwgb2Jzb2xlc2NlbmNpYSBvIGJhamEiCgkJCgkJcGVybWlzb3MgLT4gZGIgIkdlc3Rpb25hIHJvbGVzIHkgcGVybWlzb3MiCgkJCgkJYWNjZXNvRG9jdW1lbnRhbCAtPiBwZXJtaXNvcyAiQ29uc3VsdGEgcGVybWlzb3MiCgkJYWNjZXNvRG9jdW1lbnRhbCAtPiBkYiAiQ29uc3VsdGEgcHVlc3RvLCDDoXJlYSwgY2F0ZWdvcsOtYSB5IGFzaWduYWNpb25lcyIKCQkKCQlsZWN0dXJhIC0+IGRiICJSZWdpc3RyYSBhcGVydHVyYXMiCgkJbGVjdHVyYSAtPiBpbmRpY2Fkb3JlcyAiUHJvcG9yY2lvbmEgbcOpdHJpY2FzIGRlIGxlY3R1cmEiCgkJCgkJaW5kaWNhZG9yZXMgLT4gZGIgIkNvbnN1bHRhIGluZm9ybWFjacOzbiBvcGVyYWNpb25hbCIKCQkKCQlhdWRpdG9yaWEgLT4gZGIgIlBlcnNpc3RlIHRyYXphYmlsaWRhZCIKCQkKCQlub3RpZmljYWNpb25lcyAtPiBxdWV1ZSAiUHVibGljYSBtZW5zYWplcyBkZSBub3RpZmljYWNpw7NuIgoJCQoJCXdvcmtlciAtPiBub3RpZmljYWNpb25lcyAiUHJvY2VzYSBub3RpZmljYWNpb25lcyIKCQkKCQkKCQkvLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KCQkvLyBERVBMT1lNRU5UIC0gTVZQIERFIEJBSk8gQ09TVE8KCQkvLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KCQkKCQltdnAgPSBkZXBsb3ltZW50RW52aXJvbm1lbnQgIk1WUCIgewoJCQkKCQkJZGVwbG95bWVudE5vZGUgIkFXUyIgIkluZnJhZXN0cnVjdHVyYSBBV1MgZGUgYmFqbyBjb3N0byBwYXJhIGVsIE1WUC4iICJBbWF6b24gV2ViIFNlcnZpY2VzIiB7CgkJCQkKCQkJCWRlcGxveW1lbnROb2RlICJWUEMgUGxhdGFmb3JtYSBkZSBQcm9jZXNvcyIgIlJlZCBkZSBsYSBzb2x1Y2nDs24gTVZQLiIgIkFXUyBWUEMiIHsKCQkJCQkKCQkJCQlkZXBsb3ltZW50Tm9kZSAiRUMyIEFwbGljYWNpw7NuIiAiU2Vydmlkb3Igw7puaWNvIHBhcmEgbGEgY2FwYSB3ZWIgeSBhcGxpY2FjacOzbiBtZWRpYW50ZSBEb2NrZXIgQ29tcG9zZS4iICJBbWF6b24gRUMyICsgRG9ja2VyIENvbXBvc2UiIHsKCQkJCQkJCgkJCQkJCWRlcGxveW1lbnROb2RlICJDb250ZW5lZG9yZXMgQXBsaWNhY2nDs24iICJTZXJ2aWNpb3MgcHJpbmNpcGFsZXMgZGVsIE1WUC4iICJEb2NrZXIgQ29tcG9zZSIgewoJCQkJCQkJY29udGFpbmVySW5zdGFuY2Ugd2ViCgkJCQkJCQljb250YWluZXJJbnN0YW5jZSBhcGkKCQkJCQkJCWNvbnRhaW5lckluc3RhbmNlIHdvcmtlcgoJCQkJCQl9CgkJCQkJCQoJCQkJCQlkZXBsb3ltZW50Tm9kZSAiUmVkaXMgTG9jYWwiICJCcm9rZXIgZGUgbWVuc2FqZXMgcGFyYSB0YXJlYXMgYXPDrW5jcm9uYXMgZGVsIFdvcmtlci4iICJSZWRpcyIgewoJCQkJCQkJY29udGFpbmVySW5zdGFuY2UgcXVldWUKCQkJCQkJfQoJCQkJCX0KCQkJCQkKCQkJCQlkZXBsb3ltZW50Tm9kZSAiUkRTIFBvc3RncmVTUUwgU2luZ2xlLUFaIiAiQmFzZSBkZSBkYXRvcyBhZG1pbmlzdHJhZGEgZGUgYmFqbyBjb3N0byBwYXJhIGVsIE1WUC4iICJBbWF6b24gUkRTIFBvc3RncmVTUUwgU2luZ2xlLUFaIiB7CgkJCQkJCWNvbnRhaW5lckluc3RhbmNlIGRiCgkJCQkJfQoJCQkJCQoJCQkJCWRlcGxveW1lbnROb2RlICJTMyBEb2N1bWVudGFsIiAiQWxtYWNlbmFtaWVudG8gZGUgZG9jdW1lbnRvcywgdmVyc2lvbmVzIHkgZXZpZGVuY2lhcy4iICJBbWF6b24gUzMiIHsKCQkJCQkJY29udGFpbmVySW5zdGFuY2Ugc3RvcmFnZQoJCQkJCX0KCQkJCX0KCQkJfQoJCX0KCQkKCQkKCX0KCQoJCgkvLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CgkvLyBWSVNUQVMKCS8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KCQoJdmlld3MgewoJCQoJCS8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQoJCS8vIEMxIC0gU1lTVEVNIENPTlRFWFQKCQkvLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KCQkKCQlzeXN0ZW1Db250ZXh0IHBsYXRhZm9ybWEgIkMxLUNvbnRleHRvIiB7CgkJCQoJCQlpbmNsdWRlICoKCQkJaW5jbHVkZSBkZXNlbXBlbm8KCQkJYXV0b0xheW91dCBscgoJCQkKCQkJdGl0bGUgIkMxIC0gQ29udGV4dG8gZGUgbGEgUGxhdGFmb3JtYSBkZSBQcm9jZXNvcyIKCQkJCgkJCWRlc2NyaXB0aW9uICJQZXJzb25hcyB5IHNpc3RlbWFzIGV4dGVybm9zIHF1ZSBpbnRlcmFjdMO6YW4gY29uIGxhIFBsYXRhZm9ybWEgZGUgUHJvY2Vzb3MuIgoJCX0KCQkKCQkKCQkvLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KCQkvLyBDMiAtIENPTlRFTkVET1JFUwoJCS8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQoJCQoJCWNvbnRhaW5lciBwbGF0YWZvcm1hICJDMi1Db250ZW5lZG9yZXMiIHsKCQkJCgkJCWluY2x1ZGUgc29saWNpdGFudGUKCQkJaW5jbHVkZSBhbmFsaXN0YQoJCQlpbmNsdWRlIGNvb3JkaW5hZG9yCgkJCWluY2x1ZGUgamVmZVByb2Nlc29zCgkJCWluY2x1ZGUgZmlybWFudGUKCQkJaW5jbHVkZSBjb2xhYm9yYWRvcgoJCQlpbmNsdWRlIGV4dGVybm8KCQkJCgkJCWluY2x1ZGUgd2ViCgkJCWluY2x1ZGUgYXBpCgkJCWluY2x1ZGUgd29ya2VyCgkJCWluY2x1ZGUgZGIKCQkJaW5jbHVkZSBzdG9yYWdlCgkJCWluY2x1ZGUgcXVldWUKCQkJCgkJCWluY2x1ZGUga2lvc2tvCgkJCWluY2x1ZGUgc2Fzc2lwCgkJCWluY2x1ZGUgY29ycmVvCgkJCQoJCQlpbmNsdWRlIGdlcmVudGVBZG1pbgoJCQlpbmNsdWRlIHJldmlzb3JFeHRlcm5vCgkJCWluY2x1ZGUgdGFibGVyb0Rlc2VtcGVubwoJCQkKCQkJYXV0b0xheW91dCBscgoJCQkKCQkJdGl0bGUgIkMyIC0gQ29udGVuZWRvcmVzIGRlIGxhIFBsYXRhZm9ybWEgZGUgUHJvY2Vzb3MiCgkJCQoJCQlkZXNjcmlwdGlvbiAiQXJxdWl0ZWN0dXJhIGRlIGNvbnRlbmVkb3JlcyBkZSBsYSBQbGF0YWZvcm1hIGRlIFByb2Nlc29zLiIKCQl9CgkJCgkJCgkJLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CgkJLy8gQzMgLSBDT01QT05FTlRFUyBCQUNLRU5ECgkJLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CgkJCgkJY29tcG9uZW50IGFwaSAiQzMtQmFja2VuZCIgewoJCQkKCQkJaW5jbHVkZSAqCgkJCQoJCQlhdXRvTGF5b3V0IGxyCgkJCQoJCQl0aXRsZSAiQzMgLSBDb21wb25lbnRlcyBkZWwgQmFja2VuZCBBUEkiCgkJCQoJCQlkZXNjcmlwdGlvbiAiQ29tcG9uZW50ZXMgZnVuY2lvbmFsZXMgcXVlIGNvbmZvcm1hbiBlbCBCYWNrZW5kIEFQSS4iCgkJfQoJCQoJCQoJCS8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQoJCS8vIFZJU1RBIERJTsOBTUlDQQoJCS8vCgkJLy8gQ09SUkVDQ0nDk046CgkJLy8gRWwgc2NvcGUgYWhvcmEgZXMgQVBJIHBvcnF1ZSBxdWVyZW1vcyB1dGlsaXphciBjb21wb25lbnRlcy4KCQkvLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KCQkKCQlkeW5hbWljIGFwaSAiRmx1am8tUHVibGljYWNpb24iIHsKCQkJCgkJCXRpdGxlICJGbHVqbyBkZSBGaXJtYSB5IFB1YmxpY2FjacOzbiBBdXRvbcOhdGljYSIKCQkJCgkJCWZpcm1hbnRlIC0+IHdlYiAiRmlybWEgZWwgZG9jdW1lbnRvIgoJCQkKCQkJd2ViIC0+IGZpcm1hcyAiRW52w61hIGxhIGZpcm1hIGFsIEJhY2tlbmQiCgkJCQoJCQlmaXJtYXMgLT4gd29ya2Zsb3cgIlJlZ2lzdHJhIGxhIGZpcm1hIHkgdmFsaWRhIHNpIGVsIGZsdWpvIGVzdMOhIGNvbXBsZXRvIgoJCQkKCQkJd29ya2Zsb3cgLT4gcXVldWUgIlNpIGxhcyBmaXJtYXMgZXN0w6FuIGNvbXBsZXRhcywgcHVibGljYSBldmVudG8gRG9jdW1lbnRvQXV0b3JpemFkbyIKCQkJCgkJCXdvcmtlciAtPiBxdWV1ZSAiQ29uc3VtZSBlbCBldmVudG8gRG9jdW1lbnRvQXV0b3JpemFkbyIKCQkJCgkJCXdvcmtlciAtPiBkYiAiQWN0dWFsaXphIHZlcnNpw7NuLCBlc3RhdHVzIHkgZmVjaGEgZGUgcHVibGljYWNpw7NuIgoJCQkKCQkJd29ya2VyIC0+IHN0b3JhZ2UgIlB1YmxpY2EgZWwgZG9jdW1lbnRvIGNvbW8gdmVyc2nDs24gdmlnZW50ZSIKCQkJCgkJCXdvcmtlciAtPiBjb3JyZW8gIkVudsOtYSBub3RpZmljYWNpw7NuIGRlIGxpYmVyYWNpw7NuIgoJCQkKCQkJYXV0b0xheW91dCBscgoJCQkKCQkJZGVzY3JpcHRpb24gIkZsdWpvIGF1dG9tw6F0aWNvIGVqZWN1dGFkbyBjdWFuZG8gc2UgY29tcGxldGEgbGEgdG90YWxpZGFkIGRlIGZpcm1hcyByZXF1ZXJpZGFzLiIKCQl9CgkJCgkJCgkJLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CgkJLy8gREVQTE9ZTUVOVCAtIE1WUCBERSBCQUpPIENPU1RPCgkJLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CgkJCgkJZGVwbG95bWVudCBwbGF0YWZvcm1hIG12cCAiRGVwbG95bWVudC1NVlAiIHsKCQkJCgkJCWluY2x1ZGUgKgoJCQkKCQkJYXV0b0xheW91dCBscgoJCQkKCQkJdGl0bGUgIkRlcGxveW1lbnQgLSBNVlAgZGUgQmFqbyBDb3N0byIKCQkJCgkJCWRlc2NyaXB0aW9uICJNVlAgZGUgYmFqbyBjb3N0byBjb24gdW5hIMO6bmljYSBFQzIgZWplY3V0YW5kbyBXZWIsIEJhY2tlbmQsIFdvcmtlciB5IFJlZGlzIG1lZGlhbnRlIERvY2tlciBDb21wb3NlOyBSRFMgUG9zdGdyZVNRTCBTaW5nbGUtQVogcGFyYSBkYXRvcyB5IFMzIHBhcmEgZG9jdW1lbnRvcy4iCgkJfQoJCQoJCQoJCS8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQoJCS8vIEVTVElMT1MKCQkvLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KCQkKCQlzdHlsZXMgewoJCQkKCQkJZWxlbWVudCAiUGVyc29uIiB7CgkJCQlzaGFwZSBQZXJzb24KCQkJCWJhY2tncm91bmQgIzA4NDI3QgoJCQkJY29sb3IgI2ZmZmZmZgoJCQl9CgkJCQoJCQllbGVtZW50ICJTb2Z0d2FyZSBTeXN0ZW0iIHsKCQkJCWJhY2tncm91bmQgIzExNjhiZAoJCQkJY29sb3IgI2ZmZmZmZgoJCQl9CgkJCQoJCQllbGVtZW50ICJDb250YWluZXIiIHsKCQkJCWJhY2tncm91bmQgIzQzOGRkNQoJCQkJY29sb3IgI2ZmZmZmZgoJCQl9CgkJCQoJCQllbGVtZW50ICJDb21wb25lbnQiIHsKCQkJCWJhY2tncm91bmQgIzg1YmJmMAoJCQkJY29sb3IgIzAwMDAwMAoJCQl9CgkJCQoJCQllbGVtZW50ICJEYXRhYmFzZSIgewoJCQkJc2hhcGUgQ3lsaW5kZXIKCQkJCWJhY2tncm91bmQgIzQzOGRkNQoJCQkJY29sb3IgI2ZmZmZmZgoJCQl9CgkJCQoJCQllbGVtZW50ICJTdG9yYWdlIiB7CgkJCQlzaGFwZSBGb2xkZXIKCQkJCWJhY2tncm91bmQgIzQzOGRkNQoJCQkJY29sb3IgI2ZmZmZmZgoJCQl9CgkJCQoJCQllbGVtZW50ICJRdWV1ZSIgewoJCQkJc2hhcGUgUGlwZQoJCQkJYmFja2dyb3VuZCAjNDM4ZGQ1CgkJCQljb2xvciAjZmZmZmZmCgkJCX0KCQkJZWxlbWVudCAiRXh0ZXJuYWwgU3lzdGVtIiB7CgkJCQliYWNrZ3JvdW5kICM5OTk5OTkKCQkJCWNvbG9yICNmZmZmZmYKCQkJfQoJCX0KCX0KfQ==",
+    "structurizr.inspection.info" : "0",
+    "structurizr.inspection.ignore" : "0",
+    "structurizr.inspection.warning" : "0"
+  },
+  "views" : {
+    "componentViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "containerId" : "17",
+      "description" : "Componentes funcionales que conforman el Backend API.",
+      "elements" : [ {
+        "id" : "11",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "16",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "18",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "19",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "20",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "21",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "22",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "23",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "24",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "25",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "26",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "27",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "28",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "29",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "30",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "31",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "32",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "33",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "34",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "35",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "36",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "37",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalContainerBoundariesVisible" : false,
+      "key" : "C3-Backend",
+      "name" : "Component View: Plataforma de Procesos - Backend API",
+      "order" : 3,
+      "relationships" : [ {
+        "id" : "100"
+      }, {
+        "id" : "101"
+      }, {
+        "id" : "102"
+      }, {
+        "id" : "103"
+      }, {
+        "id" : "104"
+      }, {
+        "id" : "105"
+      }, {
+        "id" : "106"
+      }, {
+        "id" : "107"
+      }, {
+        "id" : "108"
+      }, {
+        "id" : "109"
+      }, {
+        "id" : "110"
+      }, {
+        "id" : "111"
+      }, {
+        "id" : "112"
+      }, {
+        "id" : "113"
+      }, {
+        "id" : "114"
+      }, {
+        "id" : "115"
+      }, {
+        "id" : "116"
+      }, {
+        "id" : "117"
+      }, {
+        "id" : "66"
+      }, {
+        "id" : "67"
+      }, {
+        "id" : "68"
+      }, {
+        "id" : "75"
+      }, {
+        "id" : "76"
+      }, {
+        "id" : "77"
+      }, {
+        "id" : "78"
+      }, {
+        "id" : "79"
+      }, {
+        "id" : "80"
+      }, {
+        "id" : "81"
+      }, {
+        "id" : "82"
+      }, {
+        "id" : "83"
+      }, {
+        "id" : "84"
+      }, {
+        "id" : "85"
+      }, {
+        "id" : "86"
+      }, {
+        "id" : "87"
+      }, {
+        "id" : "88"
+      }, {
+        "id" : "89"
+      }, {
+        "id" : "90"
+      }, {
+        "id" : "91"
+      }, {
+        "id" : "92"
+      }, {
+        "id" : "93"
+      }, {
+        "id" : "94"
+      }, {
+        "id" : "95"
+      }, {
+        "id" : "96"
+      }, {
+        "id" : "97"
+      }, {
+        "id" : "98"
+      }, {
+        "id" : "99"
+      } ],
+      "title" : "C3 - Componentes del Backend API"
+    } ],
+    "configuration" : {
+      "styles" : {
+        "elements" : [ {
+          "background" : "#85bbf0",
+          "color" : "#000000",
+          "tag" : "Component"
+        }, {
+          "background" : "#438dd5",
+          "color" : "#ffffff",
+          "tag" : "Container"
+        }, {
+          "background" : "#438dd5",
+          "color" : "#ffffff",
+          "shape" : "Cylinder",
+          "tag" : "Database"
+        }, {
+          "background" : "#999999",
+          "color" : "#ffffff",
+          "tag" : "External System"
+        }, {
+          "background" : "#08427b",
+          "color" : "#ffffff",
+          "shape" : "Person",
+          "tag" : "Person"
+        }, {
+          "background" : "#438dd5",
+          "color" : "#ffffff",
+          "shape" : "Pipe",
+          "tag" : "Queue"
+        }, {
+          "background" : "#1168bd",
+          "color" : "#ffffff",
+          "tag" : "Software System"
+        }, {
+          "background" : "#438dd5",
+          "color" : "#ffffff",
+          "shape" : "Folder",
+          "tag" : "Storage"
+        } ]
+      },
+      "terminology" : { }
+    },
+    "containerViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "Arquitectura de contenedores de la Plataforma de Procesos.",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "4",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "5",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "6",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "7",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "9",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "11",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "12",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "13",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "14",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "16",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "17",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "34",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "35",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "36",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "37",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "key" : "C2-Contenedores",
+      "name" : "Container View: Plataforma de Procesos",
+      "order" : 2,
+      "relationships" : [ {
+        "id" : "118"
+      }, {
+        "id" : "50"
+      }, {
+        "id" : "51"
+      }, {
+        "id" : "52"
+      }, {
+        "id" : "55"
+      }, {
+        "id" : "56"
+      }, {
+        "id" : "57"
+      }, {
+        "id" : "58"
+      }, {
+        "id" : "59"
+      }, {
+        "id" : "60"
+      }, {
+        "id" : "61"
+      }, {
+        "id" : "62"
+      }, {
+        "id" : "63"
+      }, {
+        "id" : "64"
+      }, {
+        "id" : "65"
+      }, {
+        "id" : "66"
+      }, {
+        "id" : "67"
+      }, {
+        "id" : "68"
+      }, {
+        "id" : "69"
+      }, {
+        "id" : "70"
+      }, {
+        "id" : "71"
+      }, {
+        "id" : "72"
+      }, {
+        "id" : "73"
+      }, {
+        "id" : "74"
+      } ],
+      "softwareSystemId" : "15",
+      "title" : "C2 - Contenedores de la Plataforma de Procesos"
+    } ],
+    "deploymentViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "MVP de bajo costo con una única EC2 ejecutando Web, Backend, Worker y Redis mediante Docker Compose; RDS PostgreSQL Single-AZ para datos y S3 para documentos.",
+      "elements" : [ {
+        "id" : "119",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "120",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "121",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "122",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "123",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "124",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "126",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "128",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "129",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "132",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "133",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "136",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "137",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "environment" : "MVP",
+      "key" : "Deployment-MVP",
+      "name" : "Deployment View: Plataforma de Procesos - MVP",
+      "order" : 5,
+      "relationships" : [ {
+        "id" : "125"
+      }, {
+        "id" : "127"
+      }, {
+        "id" : "130"
+      }, {
+        "id" : "131"
+      }, {
+        "id" : "134"
+      }, {
+        "id" : "135"
+      }, {
+        "id" : "138"
+      }, {
+        "id" : "139"
+      } ],
+      "softwareSystemId" : "15",
+      "title" : "Deployment - MVP de Bajo Costo"
+    } ],
+    "dynamicViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "Flujo automático ejecutado cuando se completa la totalidad de firmas requeridas.",
+      "elementId" : "17",
+      "elements" : [ {
+        "id" : "5",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "13",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "16",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "20",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "24",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "34",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "35",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "36",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "37",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalBoundariesVisible" : false,
+      "key" : "Flujo-Publicacion",
+      "name" : "Dynamic View: Plataforma de Procesos - Backend API",
+      "order" : 4,
+      "relationships" : [ {
+        "description" : "Firma el documento",
+        "id" : "59",
+        "order" : "1",
+        "response" : false
+      }, {
+        "description" : "Envía la firma al Backend",
+        "id" : "80",
+        "order" : "2",
+        "response" : false
+      }, {
+        "description" : "Registra la firma y valida si el flujo está completo",
+        "id" : "97",
+        "order" : "3",
+        "response" : false
+      }, {
+        "description" : "Si las firmas están completas, publica evento DocumentoAutorizado",
+        "id" : "102",
+        "order" : "4",
+        "response" : false
+      }, {
+        "description" : "Consume el evento DocumentoAutorizado",
+        "id" : "66",
+        "order" : "5",
+        "response" : false
+      }, {
+        "description" : "Actualiza versión, estatus y fecha de publicación",
+        "id" : "67",
+        "order" : "6",
+        "response" : false
+      }, {
+        "description" : "Publica el documento como versión vigente",
+        "id" : "68",
+        "order" : "7",
+        "response" : false
+      }, {
+        "description" : "Envía notificación de liberación",
+        "id" : "71",
+        "order" : "8",
+        "response" : false
+      } ],
+      "title" : "Flujo de Firma y Publicación Automática"
+    } ],
+    "systemContextViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "Personas y sistemas externos que interactúan con la Plataforma de Procesos.",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "4",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "5",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "6",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "7",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "9",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "10",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "11",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "12",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "13",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "14",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "15",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "C1-Contexto",
+      "name" : "System Context View: Plataforma de Procesos",
+      "order" : 1,
+      "relationships" : [ {
+        "id" : "38"
+      }, {
+        "id" : "39"
+      }, {
+        "id" : "40"
+      }, {
+        "id" : "41"
+      }, {
+        "id" : "42"
+      }, {
+        "id" : "43"
+      }, {
+        "id" : "44"
+      }, {
+        "id" : "45"
+      }, {
+        "id" : "46"
+      }, {
+        "id" : "47"
+      }, {
+        "id" : "48"
+      }, {
+        "id" : "49"
+      }, {
+        "id" : "50"
+      }, {
+        "id" : "51"
+      }, {
+        "id" : "52"
+      }, {
+        "id" : "53"
+      }, {
+        "id" : "54"
+      } ],
+      "softwareSystemId" : "15",
+      "title" : "C1 - Contexto de la Plataforma de Procesos"
+    } ]
+  }
+}

@@ -1,0 +1,10 @@
+services:
+  structurizr:
+    image: structurizr/structurizr
+    container_name: structurizr
+    command: local
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./:/usr/local/structurizr
+    restart: unless-stopped
